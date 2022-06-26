@@ -2,7 +2,8 @@
 // it will add newly resources
 // and remove old one in our Cache Storage
 // naming convension is: resources-yy-mm-dd_hh:mm
-const cacheName = 'resources-2022-06-26_12:36';
+// Push this file after when changed resources are already deployed in server
+const cacheName = 'resources-2022-06-26_12:42';
 
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
