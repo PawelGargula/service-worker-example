@@ -3,7 +3,8 @@
 // and remove old one in our Cache Storage
 // naming convension is: resources-yy-mm-dd_hh:mm
 // Push this file after when changed resources are already deployed in server
-const cacheName = 'resources-2022-06-26_12:42';
+const cacheKey = 'service-worker-example';
+const cacheName = `${cacheKey}-resources-2022-06-26_12:42`;
 
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
@@ -40,9 +41,8 @@ const deleteCache = async key => {
 }
 
 const deleteOldCaches = async () => {
-    const cacheKeepList = [cacheName];
-    const keyList = await caches.keys()
-    const cachesToDelete = keyList.filter(key => !cacheKeepList.includes(key))
+    const keyList = await caches.keys();
+    const cachesToDelete = keyList.filter(key => key !== cacheName && key.startsWith(cacheKey));
     await Promise.all(cachesToDelete.map(deleteCache));
 }
 
